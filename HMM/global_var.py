@@ -1,6 +1,9 @@
 import pickle
 import Trie_init
 
+# CONFIG_PATH="input/HMM/log"
+CONFIG_PATH ="/home/wuyuhang/Course/NLP/input/HMM/log/"
+DATASET_PATH="/home/wuyuhang/Course/NLP/input/HMM/data/"
 def init():
     global w_count,w2p,w2w,potential_w,p_count,p2w,trie,p2w_extend
     ''''''

@@ -5,7 +5,14 @@ __pycache__/
 db.sqlite3
 # C extensions
 *.so
-
+# HMM ignore file
+p_count
+p2w
+potential_w
+trie.pkl
+w_count
+w2p
+w2w
 # Distribution / packaging
 .Python
 log/

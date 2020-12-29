@@ -26,9 +26,7 @@ def process(c1,c2):
 # print('totally cost',time_end-time_start)
 def text_train(file_path):
     char1='\0'
-    time_start=time.time()
     # Reverse Target FileFolder, get ready for text process
-
     #Open File
     with open(file_path,'r',encoding='UTF-8') as f:
         train_text=f.readlines()
@@ -60,8 +58,6 @@ def text_train(file_path):
         pickle.dump(global_var.w_count,file)
     with open("p_count",'wb') as file: # Save data
         pickle.dump(global_var.p_count,file)
-    time_end=time.time()
-    print('totally cost',time_end-time_start)
     print(file_path+" Finished")
 
 if __name__ == '__main__':
