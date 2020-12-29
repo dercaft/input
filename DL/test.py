@@ -1,4 +1,4 @@
-from deploy import seq2seq
+from pd_model import seq2seq
 import numpy as np
 
 from hyperparams import Hyperparams as hp

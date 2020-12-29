@@ -1,20 +1,43 @@
+### 导出模型权重为pd版
+##  以准备部署
+
+from __future__ import print_function
+from hyperparams import Hyperparams as hp
 import tensorflow as tf
+import numpy as np
+from prepro import *
+from data_load import load_vocab, load_test_data, load_test_string
+from train import Graph
+import codecs
+import distance
+import os
 
-class seq2seq():
-    def __init__(self,model_path):
-        # 读取模型
-        output_graph_def = tf.GraphDef()
-        # 打开.pb模型
-        with open(model_path, "rb") as f:
-            output_graph_def.ParseFromString(f.read())
-            tensors = tf.import_graph_def(output_graph_def, name="")
+from tensorflow.python.framework import graph_io
+from tensorflow.python.framework.graph_util import convert_variables_to_constants
 
-        self.__sess = tf.Session()
-        self.__sess.run(tf.global_variables_initializer())
-        graph = tf.get_default_graph()
-        self.__input = graph.get_tensor_by_name("Placeholder:0")
-        self.__output = graph.get_tensor_by_name("ToInt32:0")
 
-    def inference(self,input):
-        output = self.__sess.run(self.__output, feed_dict={self.__input: input})
-        return output
+g = Graph(is_training=False)
+
+# Load vocab
+pnyn2idx, idx2pnyn, hanzi2idx, idx2hanzi = load_vocab()
+
+with g.graph.as_default():    
+    sv = tf.train.Supervisor()
+    with sv.managed_session(config=tf.ConfigProto(allow_soft_placement=True)) as sess:
+        # Restore parameters
+        print(hp.logdir)
+
+        sv.saver.restore(sess, tf.train.latest_checkpoint(hp.logdir)); print("Restored!")
+        
+        graph=g.graph
+        output_names=["ToInt32"]
+        input_graph_def = graph.as_graph_def()
+        frozen_graph = convert_variables_to_constants(sess, input_graph_def, output_names)
+                
+        writer=tf.summary.FileWriter("./log",frozen_graph)
+        writer.flush()
+        writer.close()
+        graph_io.write_graph(frozen_graph, './deploy', 'deploy.pb', as_text=False)        
+        # print("Finish")
+
+        
