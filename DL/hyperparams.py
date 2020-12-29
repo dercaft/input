@@ -1,4 +1,5 @@
 
+ROOT_PATH="/home/wuyuhang/Course/NLP/input/DL/"
 class Hyperparams:
     '''Hyper parameters'''
     isqwerty = True # If False, 10 keyboard layout is assumed.

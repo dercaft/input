@@ -4,7 +4,15 @@ import sys
 from django.http import HttpResponse
 from django.shortcuts import render
 
+# 添加 HMM 模块路径
+sys.path.append(r"/home/wuyuhang/Course/NLP/input/")
+
+from HMM.PinyinToText import API as hmm_api , hmm_init
+# 添加 DL 模块路径
+# sys.path.append("../../DL")
+from DL.dl_api import API as seq_api
 NULL=" "
+hmm_init()
 
 def hello(request):
     return HttpResponse("Hello World!")
@@ -19,11 +27,12 @@ def input(request):
         pinyin=request.GET["Pinyin"]
     if(not pinyin):
         return render(request,'input.html')
-    # pinyin
-    result=["1","2","3"]
-    result=["nihao","nali","今天","xianzai","总是"]
+    # hmm
+    result=hmm_api(pinyin)
     # DL
-    neural=["5","6","2","3"]
+    neural=seq_api(pinyin)
+    if(type(neural)==str):
+        neural=[neural]
     output=[]
     for i in range(len(result) if len(result) >len(neural) else len(neural)):
         item=[]

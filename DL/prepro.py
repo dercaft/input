@@ -10,7 +10,7 @@ POQRS  TUV   WXYZ
 
 '''
 from __future__ import print_function
-from hyperparams import Hyperparams as hp
+from .hyperparams import Hyperparams as hp , ROOT_PATH
 import codecs
 #import pickle
 import json

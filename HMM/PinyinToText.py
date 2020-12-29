@@ -1,8 +1,8 @@
-import global_var
-from text_process import *
+from . import global_var
+from .text_process import *
 import numpy as np
 import copy
-import Trie
+# import Trie
 
 def possibly_options(last_node, max_prob):
     word_list = []
@@ -91,7 +91,16 @@ def Pinyin2Text(pinyin,res_num=5,is_extend=0):
         out_string="".join(list(st))
         output.append(out_string)
     return output
-
+def API(pinyin:str,num:int=5):
+    group=[]
+    while len(pinyin)>0:
+        word,pinyin=global_var.trie.search_part(pinyin)
+        group.append(word)
+    result=Pinyin2Text(group,num)
+    return result
+    pass
+def hmm_init():
+    global_var.init()
 if __name__=='__main__':
     global_var.init()
     pinyin=input("Please enter Pinyin:")

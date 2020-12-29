@@ -10,7 +10,7 @@ POQRS  TUV   WXYZ
 
 '''
 from __future__ import print_function
-from hyperparams import Hyperparams as hp
+from .hyperparams import Hyperparams as hp, ROOT_PATH
 import codecs
 import numpy as np
 import re
@@ -18,16 +18,16 @@ import re
 def load_vocab():
     import pickle
     if hp.isqwerty:
-        return pickle.load(open('data/vocab.qwerty.pkl', 'rb'))
+        return pickle.load(open(ROOT_PATH+'data/vocab.qwerty.pkl', 'rb'))
     else:
-        return pickle.load(open('data/vocab.nine.pkl', 'rb'))
+        return pickle.load(open(ROOT_PATH+'data/vocab.nine.pkl', 'rb'))
 
 def load_vocab_json():
     import json
     if hp.isqwerty:
-        return json.load(open('data/vocab.qwerty.json', 'r'))
+        return json.load(open(ROOT_PATH+'data/vocab.qwerty.json', 'r'))
     else:
-        return json.load(open('data/vocab.nine.json', 'r'))
+        return json.load(open(ROOT_PATH+'data/vocab.nine.json', 'r'))
 
 
 def load_train_data():
@@ -38,8 +38,8 @@ def load_train_data():
     print("hanzi vocabulary size is", len(hanzi2idx))
 
     xs, ys = [], []
-    with codecs.open('t', 'w', 'utf-8') as fout:
-        for line in codecs.open('data/zh.tsv', 'r', 'utf-8'):
+    with codecs.open(ROOT_PATH+'t', 'w', 'utf-8') as fout:
+        for line in codecs.open(ROOT_PATH+'data/zh.tsv', 'r', 'utf-8'):
             try:
                 _, pnyn_sent, hanzi_sent = line.strip().split("\t")
             except ValueError:
@@ -62,7 +62,7 @@ def load_train_data():
 def load_test_data():
     '''Embeds and vectorize words in input corpus'''
     try:
-        lines = [line for line in codecs.open('eval/input.csv', 'r', 'utf-8').read().splitlines()[1:]]
+        lines = [line for line in codecs.open(ROOT_PATH+'eval/input.csv', 'r', 'utf-8').read().splitlines()[1:]]
     except IOError:
         raise IOError("Write the sentences you want to test line by line in `data/input.csv` file.")
 
