@@ -25,31 +25,30 @@
             <button type="submit" class="btn btn-primary mb-2">获取结果</button>
           </form>
         </div>
-        {% if result %}
-          <div class="card-body">
-            <label for="Tradition">普通输出</label>
-            <ul class="list-group" id="Tradition">
-              {% for item in result %}
-              <li class="list-group-item">{{item}}</li>
-            {% endfor %}
-            </ul>
-          </div>
-        {% endif %}
-        {% if neural %}
-          <div class="card-body">
-            <label for="Neural">DL输出</label>
-            <ul class="list-group" id="Neural">
-              <li class="list-group-item">{{neural}}</li>
-            </ul>          
-          </div>          
-        {% endif %}
+        <div class="card-body">
+          <table class="table table-bordered ">
+            <thead>
+              <tr>
+                <th scope="col">序号</th>
+                <th scope="col">HMM</th>
+                <th scope="col">Seq2Seq</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in result0 %}
+              <tr>
+                <td scope="row">{{ forloop.counter }}</td>
+                <td> {{item.0}} </td>
+                <td> {{item.1}} </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>  
+        </div>
       </div>
-      <!-- <div class="footer">
-        吴宇航 31520201153897
-      </div> -->
       <footer class="navbar navbar-fixed-bottom text-center bg-muted">
         <p class="text-center">
-          <strong>© 吴宇航 31520201153897</strong>
+          <strong>© </strong>吴宇航 31520201153897
         </p>
       </footer>
     <!-- Optional JavaScript -->

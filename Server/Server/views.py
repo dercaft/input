@@ -4,6 +4,8 @@ import sys
 from django.http import HttpResponse
 from django.shortcuts import render
 
+NULL=" "
+
 def hello(request):
     return HttpResponse("Hello World!")
 
@@ -19,8 +21,23 @@ def input(request):
         return render(request,'input.html')
     # pinyin
     result=["1","2","3"]
+    result=["nihao","nali","今天","xianzai","总是"]
     # DL
-    neural="谁啊"
+    neural=["5","6","2","3"]
+    context["index" ]=range(len(result) if len(result) >len(neural) else len(neural))
     context['result']=result
     context['neural']=neural
+    output=[]
+    for i in range(len(result) if len(result) >len(neural) else len(neural)):
+        item=[]
+        if(i<len(result)):
+            item.append(result[i])
+        else:
+            item.append(NULL)
+        if(i<len(neural)):
+            item.append(neural[i])
+        else:
+            item.append(NULL)
+        output.append(item)
+    context['result0']=output
     return render(request,'input.html',context)
