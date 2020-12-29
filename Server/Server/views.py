@@ -24,9 +24,6 @@ def input(request):
     result=["nihao","nali","今天","xianzai","总是"]
     # DL
     neural=["5","6","2","3"]
-    context["index" ]=range(len(result) if len(result) >len(neural) else len(neural))
-    context['result']=result
-    context['neural']=neural
     output=[]
     for i in range(len(result) if len(result) >len(neural) else len(neural)):
         item=[]
