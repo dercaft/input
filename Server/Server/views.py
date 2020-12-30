@@ -3,9 +3,9 @@ import sys
 
 from django.http import HttpResponse
 from django.shortcuts import render
-
+from .settings import BASE_DIR
 # 添加 HMM 模块路径
-sys.path.append(r"/home/wuyuhang/Course/NLP/input/")
+sys.path.append(os.path.dirname(BASE_DIR))
 
 from HMM.PinyinToText import API as hmm_api , hmm_init
 # 添加 DL 模块路径
@@ -28,7 +28,7 @@ def input(request):
     if(not pinyin):
         return render(request,'input.html')
     # hmm
-    result=hmm_api(pinyin)
+    result=hmm_api(pinyin,is_extend=1)
     # DL
     neural=seq_api(pinyin)
     if(type(neural)==str):

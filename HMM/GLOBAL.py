@@ -1,3 +1,3 @@
-
-CONFIG_PATH ="/home/wuyuhang/Course/NLP/input/HMM/"
-DATASET_PATH="/home/wuyuhang/Course/NLP/input/HMM/data/"
+import os
+CONFIG_PATH =str(os.path.dirname(__file__))+"/"
+DATASET_PATH=str(os.path.dirname(__file__))+"/"+"data/"

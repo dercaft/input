@@ -33,11 +33,7 @@ with g.graph.as_default():
         output_names=["ToInt32"]
         input_graph_def = graph.as_graph_def()
         frozen_graph = convert_variables_to_constants(sess, input_graph_def, output_names)
-                
-        writer=tf.summary.FileWriter("./log",frozen_graph)
-        writer.flush()
-        writer.close()
-        graph_io.write_graph(frozen_graph, './deploy', 'deploy.pb', as_text=False)        
+        graph_io.write_graph(frozen_graph, hp.logdir, 'deploy.pb', as_text=False)        
         # print("Finish")
 
         

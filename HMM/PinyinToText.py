@@ -91,12 +91,12 @@ def Pinyin2Text(pinyin,res_num=5,is_extend=0):
         out_string="".join(list(st))
         output.append(out_string)
     return output
-def API(pinyin:str,num:int=5):
+def API(pinyin:str,num:int=5,is_extend:int=0):
     group=[]
     while len(pinyin)>0:
         word,pinyin=global_var.trie.search_part(pinyin)
         group.append(word)
-    result=Pinyin2Text(group,num)
+    result=Pinyin2Text(group,num,is_extend)
     return result
     pass
 def hmm_init():

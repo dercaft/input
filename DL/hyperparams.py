@@ -1,5 +1,5 @@
-
-ROOT_PATH="/home/wuyuhang/Course/NLP/input/DL/"
+import os 
+ROOT_PATH=str(os.path.dirname(__file__))+"/"
 class Hyperparams:
     '''Hyper parameters'''
     isqwerty = True # If False, 10 keyboard layout is assumed.
