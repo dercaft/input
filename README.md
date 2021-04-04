@@ -8,6 +8,7 @@
 这里只列出部分重要python包，依赖环境的详细信息请查阅requirement.yaml
 
 #### conda一键安装可运行的虚拟环境
+* 注意 *：需要修改requirement文件的-prefix部分，改成你自己的anaconda虚拟环境路径
 
 ```
 conda create -n <ENV_NAME> -f requirement.yaml
