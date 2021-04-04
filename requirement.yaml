@@ -73,5 +73,5 @@ dependencies:
   - pip:
     - distance==0.1.3
     - xpinyin==0.7.6
-prefix: /home/wuyuhang/anaconda3/envs/input
+prefix: /anaconda3/envs/input
 
